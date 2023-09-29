@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "main": "pnpm --filter @pnpm-monorepo/main dev",
+    "build": "pnpm --filter @pnpm-monorepo/main... build",
+    "clean": "node ./scripts/clean-up.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^4.9.4",
+    "typescript": "5.2.2",
     "typescript-node": "^0.1.3"
   }
 }

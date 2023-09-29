@@ -1,7 +1,8 @@
-import { sayHi } from "@pnpm-monorepo/shared";
+import {sayHi, getRandomName} from "@pnpm-monorepo/shared";
 
 const App = () => {
-  sayHi("Vedansh");
-  return <h1>Main app</h1>;
+  const name = getRandomName()
+  sayHi(name);
+  return <h1>Welcome {name}</h1>;
 };
 export default App;
