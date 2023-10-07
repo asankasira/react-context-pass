@@ -1,8 +1,16 @@
-import {sayHi, getRandomName} from "@pnpm-monorepo/shared";
+import {getRandomWeekDay} from "@pnpm-monorepo/shared";
+import {InfoCard} from "@pnpm-monorepo/core";
+import {SolutionWrapper} from "./ctx/solution-wrapper";
 
 const App = () => {
-  const name = getRandomName()
-  sayHi(name);
-  return <h1>Welcome {name}</h1>;
+  const name = getRandomWeekDay()
+  return (
+      <>
+          <h1>Today is {name}</h1>
+          <SolutionWrapper sMsg={"info-card-id"}>
+              <InfoCard title={"Kos"} description={"Sample Desc"}/>
+          </SolutionWrapper>
+      </>
+  )
 };
 export default App;

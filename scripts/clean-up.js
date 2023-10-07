@@ -1,10 +1,14 @@
 const fs = require('fs').promises;
 const path = require('path');
 
+const args = process.argv.slice(2);
+const passedArgs = args.length > 0;
+const nodeItems = ['node_modules', 'package-lock.json', 'pnpm-lock.yaml']
 // List of files and directories to delete
 const itemsToDelete = [
-    'node_modules', 'dist',
-    'package-lock.json', 'pnpm-lock.yaml'
+    'dist',
+    ...(passedArgs ? [] : nodeItems),
+    'tsconfig.tsbuildinfo'
 ];
 
 function shouldDelete(item) {
@@ -12,25 +16,29 @@ function shouldDelete(item) {
 }
 
 const deletedPaths = new Set(); // Maintain a set of deleted paths
-async function deleteFilesAndDirectories(dir) {
+async function deleteFilesAndDirectories(entry) {
     try {
-        if (deletedPaths.has(dir)) {
+        if (deletedPaths.has(entry)) {
             return;
         }
 
-        deletedPaths.add(dir);
+        if(passedArgs && nodeItems.some(e => entry.includes(e))) {
+            return;
+        }
+
+        deletedPaths.add(entry);
 
         try {
-            await fs.access(dir);
+            await fs.access(entry);
         } catch (error) {
             return;
         }
 
-        const files = await fs.readdir(dir);
+        const files = await fs.readdir(entry);
         const deletePromises = [];
 
         for (const file of files) {
-            const filePath = path.join(dir, file);
+            const filePath = path.join(entry, file);
 
             if (deletedPaths.has(filePath)) {
                 continue;
@@ -55,9 +63,9 @@ async function deleteFilesAndDirectories(dir) {
             }
         }
 
-        if (shouldDelete(path.basename(dir))) {
+        if (shouldDelete(path.basename(entry))) {
             // console.log(`Deleting directory: ${dir}`);
-            deletePromises.push(fs.rm(dir, { recursive: true }).then(() => deletedPaths.delete(dir))); // Remove from Set after successful deletion
+            deletePromises.push(fs.rm(entry, { recursive: true }).then(() => deletedPaths.delete(entry))); // Remove from Set after successful deletion
         }
 
         await Promise.all(deletePromises);
