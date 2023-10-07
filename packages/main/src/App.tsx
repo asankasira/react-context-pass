@@ -7,8 +7,12 @@ const App = () => {
   return (
       <>
           <h1>Today is {name}</h1>
-          <SolutionWrapper sMsg={"info-card-id"}>
-              <InfoCard title={"Kos"} description={"Sample Desc"}/>
+          <SolutionWrapper sMsg={"schedule-card-id"}>
+              <InfoCard title={"Schedule"} description={"details to be available soon.."}/>
+          </SolutionWrapper>
+          <br/>
+          <SolutionWrapper sMsg={"flight-card-id"}>
+              <InfoCard title={"Next Flight"} description={"MX 320 to departure"}/>
           </SolutionWrapper>
       </>
   )
