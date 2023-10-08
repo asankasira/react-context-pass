@@ -1,8 +1,8 @@
-import {useIdContext} from "../ctx";
+import {useFrameworkContext} from "../ctx";
 
 export const TextField = () => {
-    const {pMsg} = useIdContext()
+    const {prefix} = useFrameworkContext()
     return (
-        <input {...(pMsg && {id:`${pMsg}-text`})} type={"text"}/>
+        <input {...(prefix && {id:`${prefix}-text`})} type={"text"}/>
     )
 }

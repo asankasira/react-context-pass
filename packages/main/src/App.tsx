@@ -1,19 +1,19 @@
 import {getRandomWeekDay} from "@pnpm-monorepo/shared";
 import {InfoCard} from "@pnpm-monorepo/core";
-import {SolutionWrapper} from "./ctx/solution-wrapper";
+import {SolutionProviderWrapper} from "./ctx/solution-provider-wrapper";
 
 const App = () => {
   const name = getRandomWeekDay()
   return (
       <>
           <h1>Today is {name}</h1>
-          <SolutionWrapper sMsg={"schedule-card-id"}>
+          <SolutionProviderWrapper sMsg={"schedule-card-id"}>
               <InfoCard title={"Schedule"} description={"details to be available soon.."}/>
-          </SolutionWrapper>
+          </SolutionProviderWrapper>
           <br/>
-          <SolutionWrapper sMsg={"flight-card-id"}>
+          <SolutionProviderWrapper sMsg={"flight-card-id"}>
               <InfoCard title={"Next Flight"} description={"MX 320 to departure"}/>
-          </SolutionWrapper>
+          </SolutionProviderWrapper>
       </>
   )
 };

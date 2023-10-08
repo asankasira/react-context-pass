@@ -1,16 +1,16 @@
 import {createContext, useContext} from "react";
 
-const IdContext = createContext({pMsg: ''})
+const FrameworkContext = createContext({prefix: ''})
 
-export const FrameWorkProvider = ({pMsg, children}: any) => {
+export const FrameWorkProvider = ({prefix, children}: any) => {
 
     return (
-        <IdContext.Provider value={{pMsg}}>
+        <FrameworkContext.Provider value={{prefix}}>
             {children}
-        </IdContext.Provider>
+        </FrameworkContext.Provider>
     )
 }
 
-export const useIdContext = () => {
-    return useContext(IdContext);
+export const useFrameworkContext = () => {
+    return useContext(FrameworkContext);
 }

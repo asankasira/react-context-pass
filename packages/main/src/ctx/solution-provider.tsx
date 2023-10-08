@@ -1,8 +1,8 @@
-export const SolutionProvider = ({msg, children}: any) => {
-
+export const SolutionProvider = ({msg, renderItem}: any) => {
+    //Or can pass props to renderItem function from here
     return (
         <>
-            {typeof children === 'function' ? children(msg) : children}
+            {renderItem(msg)}
         </>
     )
 }
